@@ -1,15 +1,5 @@
-
-def carregar_analytics(produto, valor_unitario, quantidade):
-    valor = float(valor_unitario)
-    quantidade_int = int(quantidade)
-    total = valor * quantidade_int
-
-    print("Produto:", produto)
-    print("Total: R$", total)
-
-
 def limpeza_dos_dados(entrada):
-    resultado = []  # acumula todas as linhas válidas
+    resultado = []
 
     for linha in entrada:
         try:
@@ -31,24 +21,4 @@ def limpeza_dos_dados(entrada):
             print(f"Erro de digitação no valor: {linha}")
             continue
 
-    return resultado  # retorna todas as linhas processadas
-
-
-dados = []
-
-while True:
-    entrada = input("Próxima linha: ")
-
-    if entrada.upper() == 'FIM':
-        break
-
-    if entrada.strip() == "":
-        continue
-
-    dados.append(entrada)  # append modifica a lista no lugar, não retorna nada
-
-linhas_processadas = limpeza_dos_dados(dados)  # passa a lista correta
-
-for data, produto, quantidade, valor_unitario, estado in linhas_processadas:
-    carregar_analytics(produto, valor_unitario, quantidade)
-
+    return resultado

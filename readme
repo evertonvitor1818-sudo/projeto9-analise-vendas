@@ -1,0 +1,111 @@
+# 📊 ETL de Vendas por Estado
+
+Sistema ETL (Extract, Transform, Load) via terminal para análise de vendas por estado, com geração de relatório e gráfico em texto.
+
+---
+
+## 🚀 Como usar
+
+### 1. Pré-requisitos
+
+- Python 3.8 ou superior
+- Nenhuma dependência externa (só biblioteca padrão)
+
+### 2. Executar
+
+```bash
+python main.py
+```
+
+### 3. Inserir os dados
+
+O programa vai pedir que você digite as linhas de dados uma por uma, no formato:
+
+```
+DATA,PRODUTO,QUANTIDADE,VALOR_UNITARIO,ESTADO
+```
+
+**Exemplo:**
+
+```
+Próxima linha: 2024-01-15,Notebook,2,3500.00,SP
+Próxima linha: 2024-01-16,Mouse,10,75.50,RJ
+Próxima linha: 2024-01-17,Teclado,5,120.00,MG
+Próxima linha: FIM
+```
+
+Digite `FIM` quando terminar de inserir os dados.
+
+---
+
+## 📁 Estrutura do projeto
+
+```
+etl_corrigido/
+├── main.py         # Ponto de entrada — coleta os dados do terminal
+├── limpeza.py      # Valida e transforma as linhas brutas em tuplas
+├── classes.py      # Calcula vendas por estado e ticket médio
+├── relatorios.py   # Gera o gráfico de barras no terminal
+└── README.md
+```
+
+---
+
+## 📋 Descrição dos módulos
+
+### `main.py`
+Ponto de entrada do programa. Lê as linhas digitadas pelo usuário e orquestra as chamadas para limpeza, análise e geração do relatório.
+
+### `limpeza.py`
+Recebe as linhas brutas (strings) e as converte em tuplas estruturadas `(data, produto, quantidade, valor_unitario, estado)`. Linhas com formato inválido ou erros de digitação são ignoradas com aviso.
+
+### `classes.py`
+Processa as tuplas limpas e calcula:
+- Total de vendas agrupado por estado
+- Ticket médio geral (valor total / quantidade total)
+
+### `relatorios.py`
+Exibe um gráfico de barras horizontal no terminal com o total de vendas por estado.
+
+---
+
+## 📤 Exemplo de saída
+
+```
+Vendas por Estado:
+SP: R$ 7000.00
+RJ: R$ 755.00
+MG: R$ 600.00
+
+Ticket Médio: R$ 491.18
+
+--- TOTAL DE VENDAS POR ESTADO ---
+SP   │ ██████████████████████████████ R$    7000.00
+RJ   │ ███                            R$     755.00
+MG   │ ██                             R$     600.00
+     └──────────────────────────────────────────────
+```
+
+---
+
+## ⚠️ Regras de formato
+
+| Campo           | Tipo    | Exemplo        |
+|-----------------|---------|----------------|
+| DATA            | texto   | `2024-01-15`   |
+| PRODUTO         | texto   | `Notebook`     |
+| QUANTIDADE      | inteiro | `2`            |
+| VALOR_UNITARIO  | decimal | `3500.00`      |
+| ESTADO          | sigla   | `SP`           |
+
+- Linhas com número de campos diferente de 5 são ignoradas.
+- O estado é convertido automaticamente para maiúsculas.
+- Use ponto ou vírgula como separador decimal no valor.
+
+## Equipe:
+
+-Elton Vinicius
+-Everton Vitor
+-Diego Gabriel
+-Arthur Santos
+

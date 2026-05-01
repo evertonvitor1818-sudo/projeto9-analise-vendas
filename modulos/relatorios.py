@@ -1,21 +1,17 @@
-import matplotlib.pyplot as plt
-
 def gerar_grafico_vendas(vendas_estado):
+    if not vendas_estado:
+        print("Nenhum dado para exibir.")
+        return
 
-    vendas_estado.plot(kind='bar', color='royalblue', edgecolor='black')
-    plt.title('Total de Vendas por Estado')
-    plt.ylabel('Valor (R$)')
-    plt.grid(True, axis='y', linestyle='--', alpha=0.6)
-    plt.tight_layout()
-    plt.show()
+    largura_maxima = 30
+    valor_referencia = max(vendas_estado.values())  # corrigido: recebe dict diretamente
 
-if __name__ == "__main__":
-    # Exemplo de uso
-    vendas_estado = {
-        'SP': 150000,
-        'RJ': 120000,
-        'MG': 90000,
-        'RS': 60000,
-        'BA': 30000
-    }
-    gerar_grafico_vendas(vendas_estado)
+    print("\n--- TOTAL DE VENDAS POR ESTADO ---")
+
+    for estado, valor in vendas_estado.items():
+        tamanho_barra = int((valor / valor_referencia) * largura_maxima)
+        barra = "█" * tamanho_barra
+        print(f"{estado:<4} │ {barra} R$ {valor:>5.2f}")
+
+    
+    print("     └" + "─" * (largura_maxima + 16))
